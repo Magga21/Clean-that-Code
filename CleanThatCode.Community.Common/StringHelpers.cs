@@ -10,7 +10,7 @@ public static class StringHelpers
     // Instead of spaces it should be separated with dots, e.g. Hello World -> Hello.World
     public static string ToDotSeparatedString(this string str)
     {
-        return str.Replace(' ','.');
+        return str.Replace(' ', '.');
     }
         
     // All words in the string should be capitalized, e.g. teenage mutant ninja turtles -> Teenage Mutant Ninja Turtles
@@ -22,8 +22,8 @@ public static class StringHelpers
     // The words should be reversed in the string, e.g. Hi Ho Silver Away! -> Away! Silver Ho Hi
     public static string ReverseWords(this string str)
     {
-        var words = str.Split(' ');
-        string newWords = string.Join(" ", words.Reverse());
-        return newWords;
+        string[] strArr = str.Split(' ');
+        var strNew = strArr.Reverse();
+        return strNew.ToString();
     }
 }
