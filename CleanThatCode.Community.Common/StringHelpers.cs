@@ -1,4 +1,6 @@
 using System.Linq;
+using System;
+using System.Globalization;
 
 namespace CleanThatCode.Community.Common;
 
@@ -14,7 +16,7 @@ public static class StringHelpers
     // All words in the string should be capitalized, e.g. teenage mutant ninja turtles -> Teenage Mutant Ninja Turtles
     public static string CapitalizeAllWords(this string str)
     {
-        return "";
+        return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(str);
     }
 
     // The words should be reversed in the string, e.g. Hi Ho Silver Away! -> Away! Silver Ho Hi
