@@ -1,3 +1,4 @@
+using System.Globalization;
 using CleanThatCode.Community.Repositories.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CleanThatCode.Community.Repositories.Implementations;
@@ -8,17 +9,31 @@ namespace CleanThatCode.Community.Tests;
 [TestClass]
 public class CommentRepositoryTests
 {
-	// Test til að sjá hvort það virki að setja mock data inn i þetta fall
-	[TestMethod]
-	public void GetAllCommentsByPostId()
+	private readonly CommentRepository _repository;
+
+	public CommentRepositoryTests()
 	{
+		var culture = new CultureInfo("en-US");
+        CultureInfo.CurrentCulture = culture;
+        CultureInfo.CurrentUICulture = culture;
 
-	var mockContext = new CleanThatCodeDbContextMock();
-	var repository = new CommentRepository(mockContext);
+		var mockContext = new CleanThatCodeDbContextMock();
+		_repository = new CommentRepository(mockContext);
+	}
 
-	var result = repository.GetAllCommentsByPostId(1);
+	[TestMethod]
+	public void GetAllCommentsByPostId_GivenWrongPostId_ShouldReturnNoComments()
+	{
+		var result = _repository.GetAllCommentsByPostId(5);
 
-	Assert.AreEqual(2, result.Count());
+		Assert.AreEqual(0, result.Count());
+	}
 
-	}	
+	[TestMethod]
+	public void GetAllCommentsByPostId_GivenValidPostId_ShouldReturnTwoComment()
+	{
+		var result = _repository.GetAllCommentsByPostId(1);
+
+		Assert.AreEqual(2, result.Count());
+	}
 }

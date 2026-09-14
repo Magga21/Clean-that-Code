@@ -6,6 +6,7 @@ using CleanThatCode.Community.Repositories.Interfaces;
 
 namespace CleanThatCode.Community.Repositories.Implementations;
 
+
 public class CommentRepository : ICommentRepository
 {
     private readonly ICleanThatCodeDbContext _dbContext;

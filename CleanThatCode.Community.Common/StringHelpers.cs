@@ -23,7 +23,7 @@ public static class StringHelpers
     public static string ReverseWords(this string str)
     {
         string[] strArr = str.Split(' ');
-        var strNew = strArr.Reverse();
-        return strNew.ToString();
+        return string.Join(" ",strArr.Reverse());
+       
     }
 }
