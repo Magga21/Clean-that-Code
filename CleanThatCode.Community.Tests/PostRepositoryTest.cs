@@ -41,10 +41,9 @@ public class PostRepositoryTests
 
 
 		_mockContext = new Mock<ICleanThatCodeDbContext>();
+		_mockContext.Setup(c => c.Posts).Returns(_posts);
 
 		_repository = new PostRepository(_mockContext.Object);
-
-		_mockContext.Setup(c => c.Posts).Returns(_posts);
 
 	}
 
@@ -56,8 +55,21 @@ public class PostRepositoryTests
 		Assert.AreEqual(3, result.Count());
 	}
 
-	public void GetAllPosts_NoFilter_ShouldContainAListOfThree()
+	[TestMethod]
+	public void GetAllPosts_FilteredByTitle_ShouldContainAListOfTwo()
 	{
-		return 0;
+		var result = _repository.GetAllPosts("Grayskull", "");
+
+		Assert.AreEqual(2, result.Count());
 	}
+
+	[TestMethod]
+
+	public void GetAllPosts_FilteredByAuthor_ShouldContainAListOfOne()
+	{
+		var result = _repository.GetAllPosts("", "Stallman");
+
+		Assert.AreEqual(1, result.Count());
+	}
+
 } 
